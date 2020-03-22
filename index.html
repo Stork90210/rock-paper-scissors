@@ -1,5 +1,5 @@
 <script>
-    
+   
     function computerPlay() {
         randInt = Math.floor(Math.random()*3);
         let computerChoice;
@@ -16,4 +16,95 @@
         }
         return computerChoice;
     }
+
+    function capitalize(string) {
+            result = string.toLowerCase().charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+            return result;
+        }
+
+    function playRound(playerSelection, computerSelection){
+        switch (playerSelection){
+            case "Rock":
+                switch (computerSelection){
+                    case "Rock":
+                        return winOrLose(0);
+                        break;
+                    case "Paper":
+                        return winOrLose(-1);
+                        break;
+                    case "Scissors":
+                        return winOrLose(1);
+                        break;
+                }
+                break;
+            case "Paper":
+                switch (computerSelection){
+                    case "Rock":
+                        return winOrLose(1);
+                        break;
+                    case "Paper":
+                        return winOrLose(0);
+                        break;
+                    case "Scissors":
+                        return winOrLose(-1);
+                        break;
+                }
+                break;
+            case "Scissors":
+                switch (computerSelection){
+                    case "Rock":
+                        return winOrLose(-1);
+                        break;
+                    case "Paper":
+                        return winOrLose(1);
+                        break;
+                    case "Scissors":
+                        return winOrLose(0);
+                        break;
+                }
+                break;
+        }
+    }
+
+    function winOrLose(result){
+        updateScore(result);
+        if (result < 0) {
+            return `You Lose! ${computerPlay()} beats ${playerSelection}`
+        }
+        if (result > 0) {
+            return `You Win! ${playerSelection} beats ${computerPlay()}`
+        } else { return `It's a draw, you've both picked ${playerSelection}`}
+    }
+
+    function game(){
+        for (i = 0; i < 5; i++){
+            playerSelection = capitalize(prompt(`Rock, Paper or Scissors?`));
+            console.log(playRound(playerSelection, computerPlay()));
+        }
+        declareWinner(playerScore, computerScore);
+    }
+
+    function updateScore(result){
+        if (result < 0) {computerScore++}
+        if (result > 0) {playerScore++}
+        else {numberOfDraws++}
+    }
+
+    function declareWinner(playerScore, computerScore){
+        if (playerScore > computerScore) {
+            console.log(`You win!`);
+        }
+        if (playerScore < computerScore) {
+            console.log(`You Lose!`);
+        } else {console.log(`It's a Draw`);}
+
+    }
+
+let numberOfDraws = 0;
+let playerScore = 0;
+let computerScore = 0;
+let playerSelection;
+let computerSelection;
+game();
+
 </script>
