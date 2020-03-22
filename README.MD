@@ -1,0 +1,1 @@
+This is the Rock Paper Scissors exercise from the Odin Project
